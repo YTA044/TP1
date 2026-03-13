@@ -1,0 +1,29 @@
+stages:
+  - build
+  - test
+  - deploy
+
+build_job:
+  stage: build
+  script:
+    - echo "Kaytsayb code..."
+    - mkdir dist
+    - echo "File build" > dist/file.txt
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - echo "Kaydir tests..."
+    - cat dist/file.txt
+  dependencies:
+    - build_job
+
+deploy_job:
+  stage: deploy
+  script:
+    - echo "Kaysimulate deploy..."
+  only:
+    - main
